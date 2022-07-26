@@ -31,13 +31,13 @@ export const getProducts = async (categoryId) => {
 };
 
 export const getProductById = async (productId) => {
-  if (productId) throw new Error("productId must be a string");
+  if (!productId) throw new Error("Missing productId");
 
   return (await getDoc(doc(db, "items", productId))).data();
 };
 
 export const getProductsByCategoryId = async (categoryId) => {
-  if (categoryId) throw new Error("categoryId must be a string");
+  if (!categoryId) throw new Error("Missing categoryId");
 
   const itemCollection = collection(db, "items");
   const q = query(itemCollection, where("category", "==", categoryId));
