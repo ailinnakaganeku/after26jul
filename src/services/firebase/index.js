@@ -23,7 +23,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 export const getProducts = async (categoryId) => {
-  if (typeof categoryId === "string") {
+  if (categoryId) {
     return await getProductsByCategoryId(categoryId);
   } else {
     return await getAllProducts();
@@ -31,15 +31,13 @@ export const getProducts = async (categoryId) => {
 };
 
 export const getProductById = async (productId) => {
-  if (typeof productId !== "string")
-    throw new Error("productId must be a string");
+  if (productId) throw new Error("productId must be a string");
 
   return (await getDoc(doc(db, "items", productId))).data();
 };
 
 export const getProductsByCategoryId = async (categoryId) => {
-  if (typeof categoryId !== "string")
-    throw new Error("categoryId must be a string");
+  if (categoryId) throw new Error("categoryId must be a string");
 
   const itemCollection = collection(db, "items");
   const q = query(itemCollection, where("category", "==", categoryId));
