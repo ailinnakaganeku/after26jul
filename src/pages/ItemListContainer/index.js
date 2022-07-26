@@ -19,7 +19,7 @@ export const ItemListContainer = ({ greeting }) => {
       })
       .catch((err) => {
         console.log(err);
-        alert("Ocurrio un error, revisar la consola!");
+        alert("An error occurred while fetching products");
       });
   }, [categoryId]);
 
